@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mission to Mars</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 400px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>Mission to Mars</h1>
+    <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Mars Data</a></p>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>Recent Mars News</h2>
+      <hr>
+      {% for i in range(6) %}
+      <h4 class = "heading">{{mars_data.featured[i].title}}</h4>
+        <p>{{mars_data.featured[i].paragraph}}</p>
+      <hr>
+      {% endfor %}    
+    </div>
+      <div class="col-sm-4">
+      <h2>Mars Facts</h4>
+        <div>
+        {{ mars_data.mars_facts | safe}}  
+        </div>
+      </div>
+  </div>
+  <div class ="row">
+    <h1>Mars Hemispheres</h1>
+    {% for i in range(4) %}
+    <div class="col-sm-6">
+    <div class="card" style="width:400px">
+      <img class="card-img-top img-thumbnail" src="{{mars_data.mars_images[i].img_url}}" alt="{{mars_data.mars_images[i].title}}">
+      <div class="card-body">
+        <h4 class="card-title">{{mars_data.mars_images[i].title}}</h4>
+        <a href="{{mars_data.mars_images[i].img_url}}" target="_blank" class="btn btn-primary stretched-link">See Full Image</a>
+      </div>
+    </div>
+  </div> 
+  {% endfor %}
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p>This project completed by Jon Smart as part of the CWRU Data Analytics Bootcamp</p>
+</footer>
+
+</body>
+</html>
+
+
